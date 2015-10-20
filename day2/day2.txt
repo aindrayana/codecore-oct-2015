@@ -1,0 +1,23 @@
+day-2
+
+- Ruby operator precedence
+- Change bash profile
+- SSH (secure shell connection)
+public private key encryption
+
+- git : version control system
+taking snapshot in time for code
+type git status (check repository status)
+git command-line:
+git init -> initialize git repo
+check if .git folder has been created: ls -a
+after initialize git, check git status again: git status
+stage git: (before you commit something, it has to be stage. stage is not taking snapshot yet)
+  ex. git add day1
+commit:
+  git commit -m "Add day 1 Ruby files"
+(after commit you have snapshot of files)
+git log: (show commit that have been done)
+
+to remove from stage:
+ex. git rm --cached day2
