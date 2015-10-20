@@ -1,23 +1,155 @@
 day-2
 
-- Ruby operator precedence
-- Change bash profile
-- SSH (secure shell connection)
+-[Ruby operator precedence]
+-[Change bash profile]
+-[SSH (secure shell connection)]
 public private key encryption
 
-- git : version control system
+-[git : version control system]
 taking snapshot in time for code
 type git status (check repository status)
 git command-line:
 git init -> initialize git repo
 check if .git folder has been created: ls -a
 after initialize git, check git status again: git status
-stage git: (before you commit something, it has to be stage. stage is not taking snapshot yet)
+
+stage git: git add (before you commit something, it has to be stage. stage is not taking snapshot yet)
   ex. git add day1
+  use: git add -A (if you have bunch of files that you want to stage)
 commit:
   git commit -m "Add day 1 Ruby files"
-(after commit you have snapshot of files)
+  (after commit you have snapshot of files)
 git log: (show commit that have been done)
-
 to remove from stage:
-ex. git rm --cached day2
+  ex. git rm --cached day2
+
+git config email:
+git config --global user.email "ajivancouver@gmail.com"
+
+git username:
+git config --global user.name "Aji Indrayana"
+
+-[github]
+  github ssh: git@github.com:aindrayana/codecore-oct-2015.git
+to push existing repo to github
+  git remote add origin git@github.com:aindrayana/codecore-oct-2015.git
+to check type: git remote -v (list git remote server)
+pushing existing repo branch (master) to remote git(github) called origin:
+  git push -u origin master
+  (if you have push before you could simple type "git push" next time)
+
+  git clone git@github.com:CodeCoreYVR/oct-2015-ruby-and-html.git
+this to clone git repo from github to your branch (computer)
+
+to pull or fetch again(only if something already clone and there is a changes and we need to pull/fetch again):
+  git pull
+
+--------------
+DATA STRUCTURES
+Arrays & Hashes
+
+Arrays -> an order of collection of object / list of index of value
+first index of array is 0
+fetch/ access element from array: array[index]
+  ex. my_array[3]
+
+set new array:
+  array = Array.new or
+  array = []
+
+array can contain other array
+  ex. a =[[1,2,3], true, "hei", "drew"]
+
+multi-dimension arrays
+  ex. a = [[1,2,3], [7,8,9], [4,5,6], [2,4,7]]
+  a[2][1] result 5
+
+push to array
+  my_array << 25 or
+  my_arra.push(25)
+
+insert to index:
+  my_array.insert(4, "hello") -> insert "hello" to index 4
+
+array.include?(25) -> check if value is in array
+
+get number of Array elements
+  array.length or
+  array.size or
+  array.count
+
+turn multi-dimension array to one-dimension array
+  array.flatten
+
+convert string to and array
+  str = "Hello Codecore Students"
+  str.split
+
+split string by character
+  str = "Hello Codecore Students"
+  str.split(//)
+
+remove last element from array
+  array.pop
+
+add element to begining of array
+  array.unshift
+
+  array.shift -> get / retrieve value from beginning
+
+Iterating through ruby
+  my_array = [1,2,3,4,5]
+  loops through array
+  my_array.each
+
+array map
+  changing each elements of array
+  my_array = [1,2,3,4,5,]
+  print my_array.map {|number| number * 2}
+  #each will not change/ modify the existing/ original element
+  print my_array.each {|number| number * 2}
+
+array.inject
+
+-----------------------
+HASHES
+
+create a hash
+  my_hashes = Hash.new
+  my_hashes = Hash.new(0)
+  my_hashes = {}
+
+me = {"name" => "Aji"}
+  me["name"] return "Aji"
+
+add element to hash
+  hash["city"] = "Burnaby"
+  hash["city"] = "Vancouver"
+
+#input a hash
+hash["age"] = 32 unless hash["age"]
+
+set default value other than nil
+  myhash = Hash.new("default")
+
+find method that return an array of keys or values
+  cars.keys -> return all of the keys on hash
+  cars.values -> return all the value on hash
+  car.keys[1] -> will return the name of second hash key
+
+-------------
+SYMBOLS
+symbols is immutable
+symbols takes same memory spots
+symbol return faster
+symbol widely uses in hashes
+ex. a = :hello
+  info = {:name => "tam", :city => "Burnaby"}
+  info[:name] -> "tam"
+
+shortcut using symbol in hashes
+ex. info = {name: "Tam", city: "Burnaby"}
+
+convert string into symbols
+  :"First Name"
+  info = {"First Name": "Tam"}
