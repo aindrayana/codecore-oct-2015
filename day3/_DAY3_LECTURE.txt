@@ -1,0 +1,239 @@
+METHOD, BLOCK, LAMBDA, OOP
+
+METHOD
+method naming convention: smallcase, using snakecase not space
+define method:
+  # define a method names multiply that requires two arguments (or parameters)
+  # it returns the multiplication result
+  def multiply(a,b)
+    a * b
+  end
+  puts multiply(2,5)  # or puts multiply 2, 5 also works
+  # method above require 2 arguments
+  # puts multiply(6) -> will not work
+
+Optional method argument(s)
+  ex. def sum(a=0,b=0)      # -> argument a and b has default value
+        a + b
+      end
+
+      puts sum(4,5)
+      puts sum(6)
+      puts sum        # this will works
+
+Value retuning
+  def my_method(a,b)
+    a * b
+    a + b
+  end
+  # will return last value/ statement
+
+  def my_method(a,b)
+    return a * b
+    a + b
+  end
+  # will return the first value
+
+  def my_method(a)
+    return 0 unless a.is_a? Integer
+  end
+
+bang ! or ? question mark on method
+  def checkme!(str)   # -> method with bang ! used to return exception
+  def checkme?(str)   # -> method with ? if require to return true or false
+
+Variable Arguments
+  by putting * before argument will result argument become array argument
+  def sum(a,*b)
+    result = a
+    b.each do |number|
+      result += number
+    end
+    result
+  end
+
+Hash as an argument
+  def my_method(user_info)
+    user_info[:name]
+  end
+  puts my_method name: "tam"  # will print tam
+  #
+  def my_method(greeting, user_info)
+    #user_info[:name]
+    "#{greeting} #{user_info[:name]}"
+  end
+  puts my_method "hello", name: "tam"       # will print hello tam
+
+--------------------------------------
+BLOCKS (is a piece of code or method with no name)
+
+  my_array = [1,2,3,4,5]
+  # I'm passing a block to the each method on the array
+  my_array.each do |number|
+    puts number + 1
+  end
+
+  # use this syntax for simple one line blocks
+  my_array.each {|number| puts number + 1}
+
+Calling block from inside a method using yield
+  def greeting            # this is a method
+    puts "Hello"
+    yield if block_given?
+    puts "Bye"
+  end
+  greeting do             # this is a block
+    puts "World"
+  end
+
+Pass argument to the block from method
+  def my_method
+    a = rand(100)
+    yield(a) if block_given?          # this will pass param to block
+  end
+  my_method do |x|
+    puts "Your lucky number is #{x}"
+  end
+  #or my_method {|x| puts "Your lucky number is #{x}"}
+
+----------------------------------------
+PROC AND LAMBDA
+  my_lambda = lambda { puts "Hello World"}
+  #lambda is like a variable that store a block
+  def my_method(a, code)
+    puts a
+    code.call
+  end
+  my_method("hi there", my_lambda)
+
+  proc (is similiar to lambda but more flexible. proc can't do a return)
+
+----------------------------------------
+EXCEPTION
+  # how to catch error by using exception:
+  begin
+    #you put code that might raise and exeption
+    10 / 0
+  rescue => exp     # this will catch any err msg to exp variable
+    # handling the exception here
+    puts "Something went wrong: #{exp.message}"
+  rescue ZeroDivisionError
+    puts "Can't devide by zero, use other number"
+  end
+
+  # to create your own exception class
+  class MyFirstException < StandardError
+  end
+
+----------------------------------------
+TERNARY OPERATOR
+  <condition> ? exp1 : exp2
+  a = true
+  puts a? "hey" : "Hello"
+  puts 1 > 3? "123" : "456"
+
+  a = gets.to_i
+  puts a > 10 ? "Large" : "Small"
+  # this equivalent to:
+  # if a > 10
+  #  puts "Large"
+  # else
+  #  puts "Small"
+  # end
+
+----------------------------------------
+TIDBITS
+  ||=  conditional assignment
+  a = 10
+  a ||= 5     # return 10 because already has value and keep the existing
+  b ||= 5     # will return because b has no value
+
+  ###
+  def a
+    puts "A was evaluated!"
+    true
+  end
+  def b
+    puts "B was evaluated!"
+    true
+  end
+  puts a || b     # just exc a
+  puts a && b     # both execute
+  ###
+
+
+================================================
+CLASSES & OBJECTS
+# Book: PRACTICAL OBJECT-ORIENTED DESIGN IN RUBY
+# class naming convention:
+# classes are constants in Ruby
+# start with capital letter
+# use CamelCase
+
+# load: will load every time it called
+# require: will only load once
+
+Class method (self)
+# this defines a public class method. I dont need to instantiate an
+# object in order to call this method, I can just call it:
+class Cookie
+  def self.info
+    puts "I'm a Cookie class"
+  end
+end
+# to call it: Cookie.info
+
+Instance variable (variable that could be use by other method)
+#usually use for passing param
+
+To call/access constants in class we use ::
+# Cookie::CALORIES_PER_SUGAR_GRAM
+
+Global variable
+  class Cookie
+    $myvar = "Hello World"
+  end
+  puts $myvar
+
+Class variable (variable that global to class)
+  class Cookie
+    @@color = "Brown"
+  end
+
+Attributes Reader & Attribute Writer & Attribute Successor
+attr_reader :sugar_amount
+attr_writer :sugar_amount
+attr_accessor :flour_amount
+
+
+==============================================
+INHERITANCE
+(class that inherite from another class)
+
+class Cookie
+  def initialize(sugar_amount, flour_amount)
+    @sugar_amount = sugar_amount
+    @flour_amount = flour_amount
+  end
+end
+
+class Oreo < Cookie
+
+end
+
+Super will call the parent method
+
+===============================================
+MODULE
+class = able to create object
+module = cannot create an object / make an object instance
+ex.
+  module Fruit
+    class Apple
+
+    end
+  end
+  f = Fruit.new #will return error
+
+[include and extend]
+extend = will include all the methods in the module as class methods of instance methods
