@@ -1,0 +1,30 @@
+h3 {
+  color: brown;
+}
+img {
+  height: 300px;
+}
+p {
+  text-decoration: none;
+  background-color: #E5F9F9;
+}
+
+#list {
+  color: purple;
+}
+
+.special-list {
+  text-decoration: line-through;
+}
+
+ul li {
+  color: red;
+}
+
+/* target all <p> element with class abc and id xyz */
+p.abc#xyz {}
+
+/* target all <p> elemetns within a <div> with a class special */
+div.special.p {}
+
+/* target all <li> elements within */

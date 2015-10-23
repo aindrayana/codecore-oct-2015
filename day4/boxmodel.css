@@ -1,0 +1,12 @@
+body {
+  margin:0 auto;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+
+  border: 5px solid;
+  padding-right: 10px;
+}
