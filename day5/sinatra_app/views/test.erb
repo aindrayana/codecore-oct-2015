@@ -1,0 +1,18 @@
+<% require "Faker" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My First Sinatra App</title>
+  </head>
+  <body>
+    <h1>Welcome to my Sinatra App</h1>
+    <h1><a href="#">Generate Phrase</a></h1>
+
+    <p><% if @phrase %>
+    <%= @phrase  %>
+    <% end %>
+  </p>
+
+  </body>
+</html>

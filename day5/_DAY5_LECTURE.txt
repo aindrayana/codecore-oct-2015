@@ -1,0 +1,17 @@
+RUBY GEMS
+
+library of codes in ruby is called gems
+https://rubygems.org/
+
+to install gems:
+gem install <gem_name>
+
+Faker gems
+gem that help connect with reddit: snooby
+
+
+SINATRA
+=====================================
+gem install sinatra
+
+curl http://localhost:4567

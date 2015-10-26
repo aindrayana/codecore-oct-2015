@@ -1,0 +1,11 @@
+<hr>
+<form method="post" action="/temperature">
+  <div><label for="tempinc">Temperature in &deg;C</label></div>
+  <div><input type="text" id="tempinc" name="temperature" value="<%= @temp_c %>">
+    <input type="submit" value="Submit"></div>
+</form>
+<% if @temp_f %>
+<p>Result:
+  <b><%= @temp_f %> &deg;F</b>
+</p>
+<% end %>
