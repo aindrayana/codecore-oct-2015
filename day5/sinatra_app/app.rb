@@ -74,3 +74,24 @@ end
 # get "/convert" do
 #  erb :convert, layout: :app_layout
 # end
+
+get "/randomizer" do
+  @students = Faker::Name.first_name
+  18.times {@students+=", "+Faker::Name.first_name}
+  erb :randomizer, layout: :app_layout
+end
+
+post "/randomizer" do
+  @students = params["team"]
+  @team_array = @students.gsub(" ", "").split(",").shuffle
+  @num = params["num"].to_i
+
+      @group = []
+      @num.times {@group << []}
+      @i = 0
+      while @i < @team_array.count
+          @group[ @i % @num ] << @team_array[@i]
+          @i+=1
+      end
+  erb :randomizer, layout: :app_layout
+end

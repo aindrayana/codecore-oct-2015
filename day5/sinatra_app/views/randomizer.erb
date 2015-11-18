@@ -1,0 +1,18 @@
+    <h1>TEAM RANDOMIZER</h1>
+    <form method="post" action="/randomizer">
+      <div><label for="team">Names</label></div>
+      <div><input type="text" id="team" name="team" value="<%= @students %>" size="150"></div>
+      <div><label for="num">Number of Teams</label></div>
+      <div><input type="text" id="num" name="num" value="<%= @num %>"></div>
+
+      <input type="submit" value="Submit">
+    </form>
+
+<% if @group %>
+<p>
+  <% @group.each do |x| %>
+    Group <%= @group.index(x) + 1 %>: <b><%= x.join(", ") %></b>
+    <br>
+  <% end %>
+</p>
+<% end %>
