@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AwesomeAnswers</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<!--
+  <a href="<%= root_path %>">HOME</a> | <a href="<%= hello_path %>">HELLO</a> |
+  <%# link_to is called a view helper, link_to is built-in with rails.
+    it generate an anchor HTML tag: see below %>
+  <%= link_to("HELLO", hello_path) %> |
+  <%= link_to("GREETING Aji", greeting_path(name: "Jade")) %> |
+  <%= link_to("URL Route", "http://localhost:3000/rails/info") %> |
+ -->
+  <%= link_to "New Question", new_question_path %> |
+
+<%= yield %>
+<!--
+<hr>
+index_path : <%= index_path %>
+<hr>
+index_url : <%= index_url %>
+<hr>
+ -->
+</body>
+</html>

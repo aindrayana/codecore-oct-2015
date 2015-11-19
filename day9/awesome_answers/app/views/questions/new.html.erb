@@ -1,0 +1,44 @@
+<!-- ## Added this part below on Oct-29 Bootcamp day9 -->
+<h1>Create New Questions</h1>
+
+<%# 1. The form below won't work because  it doesnt have authenticity token generated %>
+<!-- <form action="<%= questions_path %>" method="post">
+  <input type="submit" value="Create Questions">
+</form> -->
+
+<%# 2. The form below will work because it has an authenticity token generated in hidden-type tag %>
+<!-- <form action="<%= questions_path %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="submit" value="Create Questions">
+</form> -->
+
+<%# 3. this will automatically generate authenticity_token hidden field
+  with the proper value set
+  we use form_tag if we dont have model associate with it %>
+<!-- <%= form_tag questions_path do %>
+  <%= submit_tag "Create Questions" %>
+<% end %> -->
+
+<%# to show error message when the form submitted and give error %>
+<%= @q.errors.full_messages.join(", ") %>
+
+<%# 4. form_for looks at the type of object that you give it, (in this case Question object)
+  and then automatically guesses the url assuming you followed Rails conventions
+  so it assumes that you have questions_controller and if you pass it a new Questions model
+  it will submit it to 'questions_path' by question %>
+<%#= form_for Question.new do |f| %>
+<%= form_for @q do |f| %>
+  <div>
+    <%# this generates an input with a name attributes that is question[title]
+      Rails will give us the parameters for this form within the params Hash
+      as a value of "question" key %>
+    <%= f.label :title %>
+    <%#= f.text_field :title, {value: params[:question][:title]}%>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label(:body) %>
+    <%= f.text_area(:body) %>
+  </div>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,8 @@
+CRUD
+=====
+1. look at questions_controller.rb
+2. look at routes.rb
+3. look at new.html.erb
+
+STEPS ON CREATING SUBMIT FORMS
+==============================
