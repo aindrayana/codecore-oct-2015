@@ -1,0 +1,203 @@
+DATABASES
+=======================
+Relational Databases
+SQL: Structure Query Language
+
+id | first_name | last_name   | email         |  phone_number
+--------------------------------------------------------
+1   tam           Kbeili        tam@codcore.ca  887.123.4567
+2   Yushadha      Bogada
+3   Mirko         Suzara
+4   Drew          Ogryzek
+
+CRUD
+===========
+CREATE, READ, UPDATE, DELETE
+
+create practice.bd
+1. open sqlite3:
+$ sqlite3 practice.db
+2. create table
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  email VARCHAR(255),
+  phone_number VARCHAR(255)
+);
+3. check table that weve created
+.tables
+4.insert
+INSERT INTO users(first_name, last_name, phone_number, email)
+VALUES ("Tam", "Kbeili", "778.999.8776", "tam@codecore.ca");
+INSERT INTO users(first_name, last_name, phone_number, email)
+VALUES ("John", "Smith", "778.999.7775", "john@codecore.ca");
+
+5. check
+SELECT * FROM users;
+SELECT * FROM users WHERE id=1;
+SELECT * FROM users WHERE first_name = "Tam";
+
+6. update table
+UPDATE users SET first_name = "Tammam" WHERE id=1;
+
+7. delete
+DELETE FROM users WHERE id=1;
+
+8. update with conditional
+UPDATE users set email=NULL WHERE id>3 AND id<7;
+UPDATE users set email=NULL WHERE id IN (4,5,7);
+
+9. quit sqlite3
+.quit
+
+
+ORM (Object Relational Mapping)
+===============================
+Connects object code to a relational database
+rails comes with ORM called ActiveRecord
+Model in rails that wil connect to ORM
+
+rails g
+# will list all generator that rails could generate
+ORM Convention in Rails
+1. model is singular
+2. table name is plural
+
+if we have a model name "question" --> the table name will be "questions"
+
+1. CREATE MODEL (by rails generate the model)
+$ rails g model question title:string body:text
+# rails g model question first_name:string last_name:string email:string
+
+#(to DELETE MODEL: rails d model question)
+
+2. To run the migration
+bin/rake db:migrate
+
+3. If we want to add other field
+bin/rails g migration add_view_count_to_questions
+# this will generate another file in /db/migrate
+
+4. run the migration
+bin/rake db:migrate
+
+(5. to rollback migration)
+bin/rake db:rollback    # this will rollback in order of the schema
+bin/rake db:rollback STEP=2   # will rollback 2 steps back
+
+6. ActiveRecord
+rails console with all the rails environment loaded
+bin/rails c
+# if errors occured, add required gems to Gemfile file
+in rails console type:
+> q = Question.new
+q.title = "My first Question title"
+q.body = "My first questions body"
+q # view the table
+q.persisted?  # check if record have been added to db
+q.save    # to save record to database
+Question.all # to view all the record in database
+# if we want to create a new record inside hash
+q1 = Question.new({title: "My second question"})
+q1.save
+
+# check your database records
+Question.all
+Question.order(:created_at)  # SELECT "questions".* FROM "questions"  ORDER BY "questions"."created_at" ASC
+
+# This will create record straight to database
+Question.create({title: "My another question", body: "My another body", view_count: 0})
+
+TO MODIFY or ALter
+# first find the record
+abc = Question.find(2)
+# change the value that we want to update
+abc.view_count = 10
+# save
+abc.save # this will create UPDATE "questions" SET "view_count" = $1, "updated_at" = $2 WHERE "questions"."id" = $3
+
+FIND in Record
+Question.find_by_<column_name>
+Question.find_by_title("My second question")
+Question.where(title: "My second question")
+Question.where(title: "My second question", view_count: 0)
+Question.where(title LIKE "%second%")  # search field in db case-sensitive
+Question.where(title ILIKE "%Second%")  # search field in db case-insensitive only postgresql
+
+Question.where(["title ILIKE ?", '%Second%'])     # we use this to protect from SQL Inject
+
+# find record that created_at field value is more than 40 minutes ago
+Question.where(["created_at > ?", (Time.now - 40.minutes)])
+Question.where(["created_at > ?", 40.minutes.ago])
+
+
+https://xkcd.com/327
+
+SEED THE RECORDS
+/db/seeds.rb  # this file if we want to fill/ seed database
+bin/rake db:seed
+
+
+Question.all
+#pagination, here we load the first 10 result start from record/offset 41..50
+Question.limit(10).offset(40)
+
+ORDER/ SORT
+Question.limit(10).order(:title)
+Question.limit(10).offset(40).order("title desc")
+
+UPDATE
+q.update({view_count:100, title: "hello world"})
+
+DELETE record from database
+q.destroy   # DELETE FROM "questions" WHERE "questions"."id" = $1  [["id", 100]]
+
+q = Question.where(["title ILIKE ?", "%robust%"])
+q.destroy_all   # this will delete all records that queried before
+
+VALIDATION
+(find more about validation sample in question.rb file or
+http://guides.rubyonrails.org/active_record_validations.html)
+q = Question.new
+q.save
+Question.last
+# -- to prevent user from input/ saving empty record (condition)
+# inside the models/question.rb we put validation
+validates(:title, {presence: true})
+reload! # then reload to reload the changes
+
+TO FIND ERROR
+q = Question.new({title: "monkey"})
+q.save   # will not be able to save because we have put validation in models/question.rb
+q.errors
+q.errors.messages
+q.errors.full_messages
+
+=========
+CALLBACK
+=========
+1. initialize active record
+  # we can call a method after initialize
+  # we can call a method before validate
+2. validation
+  # we can call a method after validate
+  # we can call a method before save
+3. save
+  # we can call a method after save
+  # we can call a method before commit
+4. commit
+# we can call a method after commit
+# check sample code at question.rb
+
+===============================
+CUSTOM ACTIVERECORD METHOD QUERY
+===============================
+# example we want to get the recent 10 record
+Question.last(10)
+Question.order("created_at DESC").limit(10)
+# we have created a method in question.rb called recent_ten
+Question.recent_ten   # will result the same as above
+
+
+?Question.select(:title)
