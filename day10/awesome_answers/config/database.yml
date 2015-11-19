@@ -1,0 +1,27 @@
+# to drop the current database and recreate database
+# development:  <-- look this line
+#   <<: *default
+#   database: awesome_questions_development <-- change the database name
+# rake db:drop db:create db:migrate db:seed  <-- then recreate db using this line
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: awesome_answers_development
+
+
+test:
+  <<: *default
+  database: awesome_answers_test
+
+production:
+  <<: *default
+  database: awesome_answers_production
+  username: awesome_answers
+  password: <%= ENV['AWESOME_ANSWERS_DATABASE_PASSWORD'] %>

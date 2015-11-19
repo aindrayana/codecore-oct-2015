@@ -1,0 +1,62 @@
+REFACTORING
+===========
+CHanging the arrangement / structure of code without changing the behaviour of the code
+minimalize duplication.
+1. questions_controller.rb
+
+# "before_action" is action that execute before all actions
+# ex. we put line below before we define method in controller (questions_controller.rb)
+before_action :find_question, only: [:show, :edit, :update, :destroy]
+
+
+# flash message (like session but it only read once and deleted)
+# for instance we want to give a notice after we delete record
+# on questions_controller
+def destroy
+  # @q = Question.find params[:id]
+  @q.destroy
+  flash[:notice] = "Question deleted successfully"  #we add this line
+  redirect_to questions_path
+end
+
+# and we add line in layouts/application.html.erb
+<%= flash[:notice] || flash[:alert] %>
+
+#so then everytime record deleted, flash will send one time session/cookie
+# that used by flash[:notice] tag in application.html.erb
+
+
+========================
+HTML+CSS+JS
+ADVANCED
+========================
+DISPLAY in CSS
+BLOCK elements
+p {
+  display: block;
+}
+INLINE elements
+p {
+  display: inline;
+}
+NONE elements
+p {
+  display: none;
+}
+
+
+FLOAT
+div {
+  float:left;
+}
+
+=========
+BOOTSTRAP
+=========
+Bootsrap: most popular HTML CSS JS framework to develope responsive & mobile web
+http://getbootstrap.com/
+Sass: a way to make more easier to use css
+
+viewport: what the user viewing on current screen
+
+container

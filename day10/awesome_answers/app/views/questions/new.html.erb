@@ -1,0 +1,9 @@
+<!-- ## Added this part below on Oct-29 Bootcamp day9 -->
+<h1>Create New Questions</h1>
+
+<%#= render("/questions/form") %>
+<%# this will look for a partial name "_form.html.erb" within the same
+  folder as the file we're in (new.html.erb) and render it in here.
+  Partials can access instance variables but not local variables.
+  partial file start with "_filename.html.erb" %>
+<%= render "form" %>

@@ -1,0 +1,13 @@
+
+<hr>
+
+<form method="get" action="/convert">
+  <div><label for="tempinc">Temperature in &deg;C</label></div>
+  <div><input type="text" id="tempinc" name="convert" value="<%= @temp_c %>">
+    <input type="submit" value="Submit"></div>
+</form>
+<% if @temp_f %>
+<p>Result:
+  <b><%= @temp_f %> &deg;F</b>
+</p>
+<% end %>
