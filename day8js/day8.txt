@@ -1,0 +1,287 @@
+JAVASCRIPT
+==========
+Webpage = HTL + CSS + Javascript
+Javascript control behavior in your page
+
+History:
+created by Brendan Eich 1995
+standarized as ECMAScript
+2016 -> ECMAScript 6
+
+Agenda
+- Javascipt Basic
+- Advanced Javascript
+- Manipulating page with DOM
+- DOM with jQuery
+- Transitions and animations
+- Talking to server using AJAX
+
+Script Tag
+see: javascript/1_basic/index.html
+
+Numbers
+default number is float in js
+1 / 2 = 0.5
+parseInt("10") / parseInt("4")      // 2.5
+
+Strings
+we can use single ('') or double quotes ("")
+"This is a string"
+'So is this'
+"This is \n on a new line"
+"Using escape character "
+
+Combining strings
+"one" + "two" -> "onetwo"
+'A' + ' ' + 'B' -> "A B"
+'4' + 5 -> "45"
+
+"abc".length -> 3
+''.length -> 0
+
+"abc"[2] -> "c"
+"abc"[-1] -> "undefined"
+
+Try this:
+> a = "abc"
+'abc'
+> a[0]
+'a'
+> a[0] = "X"    // we change the a[0] = "X"
+'X'
+> a[0]      // string is immutable in javascript
+'a'         // when we call a[0] again it back to a
+> a
+'abc'
+
+--
+convert
+> parseInt("123")
+123
+> parseInt("123abc")
+123
+> parseInt("abc")
+NaN
+
+Concate string
+var name = "Hello, " + "Aji" + "!"
+
+Strings Summary
+- Could use single or double quote
+- string is array of character
+- string is an object
+- no string interpolation in js
+
+
+VARIABLE IN JS
+==============
+var a;
+a = 5;
+var b = 'hello';
+var myAge = 30;
+if var is not define, than variable will become global variable
+in js we use lower camelCase in declaring variable
+put semicolons ";" after declaring variable
+ex.
+var firstName = "Aji";
+var lastName = "Indrayana";
+var fullName = firstName + ' ' + lastName;
+fullName
+
+COMMENTS
+============
+// THis is a comment
+/* This is a comment
+    for multiple lines
+*/
+
+
+I/O
+===
+console.log  //will only print in console
+
+
+Built-ins
+=========
+get input from user we use prompt:
+var name = prompt("WHat is your name: ");
+alert('Your name is ' + name);
+// confirm will show you a popup msg with "ok" and "cancel" option
+// if user clicks "ok", the result will be true
+// if user clicks "cancel" result will be false
+var result = confirm("Are you sure " + name + "?");
+console.log(result);
+
+NULL AND UNDEFINED
+==================
+> var ab;
+undefined
+> ab
+undefined
+> var ab = null;
+undefined
+> ab
+null
+
+BOOLEANS
+=========
+true false
+2 > 1         // true
+0.5 < 0       // false
+true && false // false
+"abc" > "def" // false
+"c" == "c"    // true
+"2" == 2      // true, because it check the value not the type
+
+in javascript we use === (triple equal) will check the type and value
+"2" === 2     //false
+
+'abc'.length == 3            // true
+5 * 2 != 10                  // false
+parseInt("123.5") > 123      // false
+4 + '5' === 9                // false
+"123"[3] == '3'              // false
+
+
+CONDITIONAL
+==========
+if (condition) {
+  // action
+}
+
+if (a) {
+  // ..
+} else if (b) {
+  // ..
+} else {
+  // ..
+}
+
+if ("hello") { alert("tes"); }
+if ("") { alert("tes"); }
+if (10) { alert("tes"); }
+if (0) { alert("tes"); }
+if (NaN) { alert("tes"); }
+if (null) { alert("tes"); }
+if (undefined) { alert("tes"); }
+if (false) { alert("tes"); }
+if (true) { alert("tes"); }
+
+
+in js, "if" is a statement, not an expression
+this code below is not valid
+// Not valid JS
+var answer = if (a) {
+  2
+} else { 3 };
+
+ITERATION
+=========
+
+WHILE LOOP
+while (condition) {
+  // body
+}
+
+Example
+Use a while loop to log the numbers from 0 to 100 to the console
+var = 0;
+while (x <= 100) {
+  console.log(x);
+  x++; // x += 1
+}
+
+FOR LOOP
+for (var i = 0; i <= 100; i +=1) {
+  console.log(i);
+}
+
+Break from LOOP
+//ex. find number divisible by 3, 4 and 5. result is 60
+var x = 1;
+while (x <=100) {
+  if(x%3==0 && x%4==0 && x%5==0) {
+    console.log(i);
+    break;
+  }
+}
+
+======
+ARRAYS
+======
+can access elements by index, index start by 0
+ex.
+var myArray = [1,2,3,"Hello World", null, true]
+myArray[0] -> 1
+myArray[6] -> undefined
+myArray[-1] -> undefined
+
+myArray.length -> 6
+myArray.push("hey!");     // push to "hey" array
+myArray.pop()             // result is "hey". it pop the last
+
+unshift add element at the beginning of array
+var array = [1, 2, 3];
+array.unshift("4");
+// result: array=["4", 1, 2, 3]
+
+LOOP on ARRAYS
+==============
+var names = ["Jim", "Tom", "Jason", "Brian"]
+for (var i = 0; i < names.length; i++) {
+  console.log("Hello " + names[i]);
+}
+
+
+SPLIT AND JOIN
+==============
+t = "Hello codecore students"
+t.split("");
+// result: ["H", "e", "l", "l", "o", " ", "c", "o", "d", "e", "c", "o", "r", "e", " ", "s", "t", "u", "d", "e", "n", "t", "s"]
+t.split(" ");
+// ["Hello", "codecore", "students"]
+t.join();
+
+
+==========
+FUNCTIONS
+==========
+// Define a function
+var doubleIt = function(a) {
+  console.log(a * 2);
+};
+// Call a function
+doubleIt(5);
+
+// if we dont put return statement, it will return undefine. so we rewrite:
+var doubleIt = function(x) { return x * 2}
+
+=========
+OBJECTS
+=========
+var myObject = {
+  a: 5,
+  b: 6,
+  c: 7 };
+
+key is always a string in js
+using the dot "." to access objects the value
+
+var myObject = {a: 5, b: 6, c: 7 };
+myObject.a
+> 5
+myObject["a"]
+> 5
+myObject.a = "Hello"
+> myObject = {a: "Hello", b: 6, c: 7 };
+myObject.d
+> undefine
+
+
+NESTED OBJECTS (Object-ception)
+===============================
+var obj = {
+  a: [1, 2, 3],
+  b: { c: 6 }
+};
+console.log(obj.a[2] + obj.b.c);
