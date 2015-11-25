@@ -1,0 +1,53 @@
+TDD AND RSPEC MORE ...
+======================
+
+  yesterday we build campaign model, we continue with our fundsy app
+
+1.  create controller campaigns
+    rails g controller campaigns
+
+2. campaign controller
+
+    describe "#new" do
+      context "with user not signed in" do
+        it "redirects to user sign up page"
+      end
+      context "with user signed in" do
+        it "renders the new template"
+        it "create a new campaign object assigned to 'campaign' instance variable"
+      end
+    end
+
+3.  add factory_girl to gem file
+    gem 'factory_girl_rails'
+    bundle
+
+    factory_girl is a fixtures replacement with a straightforward definition syntax,
+    support for multiple build strategies (saved instances, unsaved instances,
+    attribute hashes, and stubbed objects), and support for multiple factories for
+    the same class (user, admin_user, and so on), including factory inheritance.
+
+    bin/rails g factory_girl:model user
+    bin/rails g factory_girl:model campaign
+
+    go to spec/factories
+
+    FactoryGirl.attributes_for(:user)
+        2.2-head :003 > FactoryGirl.attributes_for(:user)
+        {
+            :first_name => "Miguel",
+             :last_name => "Ondricka",
+                 :email => "johnny@jastruecker.org",
+              :password => "12ur0z6zd"
+        }
+
+    FactoryGirl.attributes_for(:user).merge({email: nil})
+        2.2-head :004 > FactoryGirl.attributes_for(:user).merge({email: nil})
+        {
+            :first_name => "Junius",
+             :last_name => "Ondricka",
+                 :email => nil,
+              :password => "12ur0z6zd"
+        }
+
+    as
